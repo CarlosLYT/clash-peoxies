@@ -1,0 +1,61 @@
+# ====== 基础设置 ======
+mixed-port: 7890
+allow-lan: false
+mode: rule
+log-level: info
+external-controller: 127.0.0.1:9090
+
+# ====== DNS 配置（启用 Fake-IP 防污染）[6,9](@ref) ======
+dns:
+  enable: false
+  listen: 0.0.0.0:53
+  enhanced-mode: fake-ip  # 伪造IP防止DNS污染
+  nameserver:
+    - 114.114.114.114    # 国内DNS（电信）
+    - 8.8.8.8            # 海外DNS（Google）
+  fallback:              # 备用DNS（代理专用）
+    - tls://1.1.1.1@853  # Cloudflare加密DNS
+    - https://dns.google/dns-query
+
+# ====== 代理节点（SSR单节点）=====
+proxies:
+  - name: "SSR_节点"
+    type: ssr
+    server: dongtaiwang5.com
+    port: 25679
+    password: "dongtaiwang.com"  # ✅ 已填入密码
+    cipher: chacha20-ietf
+    protocol: auth_chain_a
+    obfs: tls1.2_ticket_auth
+    udp: true  # 启用UDP转发
+
+# ====== 策略组（适配DNS分流）=====
+proxy-groups:
+  - name: "🚀 代理策略"
+    type: select
+    proxies:
+      - "SSR_节点"
+      - DIRECT
+
+  # DNS专用组（强制代理海外DNS查询）
+  - name: "DNS_PROXY"
+    type: select
+    proxies:
+      - "SSR_节点"  # 强制DNS查询走代理
+
+# ====== 规则分流（DNS关键优化）=====
+rules:
+  # 国内直连规则
+  - GEOIP,CN,DIRECT              # 中国大陆IP直连 [9](@ref)
+  - DOMAIN-SUFFIX,cn,DIRECT      # 中国域名直连
+  
+  # DNS强制代理规则（避免污染）
+  - DST-PORT,53,DNS_PROXY        # 所有53端口DNS请求强制代理 [6](@ref)
+  - IP-CIDR,8.8.8.8/32,DNS_PROXY # 指定海外DNS服务器走代理
+  
+  # 国际服务代理
+  - DOMAIN-SUFFIX,google.com,🚀 代理策略
+  - DOMAIN-SUFFIX,youtube.com,🚀 代理策略
+  
+  # 最终规则
+  - MATCH,🚀 代理策略
