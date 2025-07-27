@@ -22,7 +22,7 @@ proxies:
   - name: "SSR_节点"
     type: ssr
     server: dongtaiwang5.com
-    port: 25679
+    port: 33336
     password: "dongtaiwang.com"  # ✅ 已填入密码
     cipher: chacha20-ietf
     protocol: auth_chain_a
