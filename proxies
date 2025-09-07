@@ -21,7 +21,7 @@ dns:
 proxies:
   - name: "SSR_节点"
     type: ssr
-    server: dongtaiwang5.com
+    server: ssr.762988.xyz
     port: 33336
     password: "dongtaiwang.com"  # ✅ 已填入密码
     cipher: chacha20-ietf
