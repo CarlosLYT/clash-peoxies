@@ -43,6 +43,36 @@ proxies:
     reality-opts:
       public-key: vQxUlk2tCENv9crfrUAp5JdJOZTKhMH7XnoKLqbAYx0
       short-id: c0d304da0c4dcadc
+  
+  - name: "VMESS传输2-ipv6"
+    type: vmess
+    server: 2001:bc8:1203:209::50
+    port: 23008
+    uuid: e994b804-345c-4e8b-a827-7e005694d146
+    alterId: 0
+    cipher: auto
+    udp: true
+    tls: false
+    network: ws
+    ws-opts:
+      path: "/github.com/Alvin9999"
+      headers:
+        Host: "www.bing.com"
+
+  - name: "Hysteria2节点3-ipv6"
+    type: hysteria2
+    server: "[2001:bc8:1203:209::60]"
+    port: 33880
+    password: "dongtaiwang.com"
+    sni: "apple.com"
+    alpn:
+      - "h3"
+    skip-cert-verify: true
+    # 以下是可选的 Hysteria2 高级参数
+    # up: "100 Mbps"  # 上传速度
+    # down: "100 Mbps"  # 下载速度
+    # obfs: "your-obfs-password"  # 混淆密码（如果有）
+    # obfs-type: "salamander"  # 混淆类型（如果有）
 
 # ====== 策略组（适配DNS分流）=====
 proxy-groups:
@@ -50,6 +80,8 @@ proxy-groups:
   - name: "自动选择"
     type: url-test
     proxies:
+      - "Hysteria2节点3-ipv6"
+      - "VMESS传输2-ipv6"
       - "VLESS节点1"
       - "SSR节点"
     url: "http://www.gstatic.com/generate_204"
@@ -61,6 +93,8 @@ proxy-groups:
     type: select
     proxies:
       - "自动选择"
+      - "Hysteria2节点3-ipv6"
+      - "VMESS传输2-ipv6"
       - "VLESS节点1"
       - "SSR节点"
       - "DIRECT"
