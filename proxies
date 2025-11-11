@@ -80,10 +80,10 @@ proxy-groups:
   - name: "自动选择"
     type: url-test
     proxies:
-      - "Hysteria2节点3-ipv6"
-      - "VMESS传输2-ipv6"
-      - "VLESS节点1"
       - "SSR节点"
+      - "VLESS节点1"
+      - "VMESS传输2-ipv6"
+      - "Hysteria2节点3-ipv6"
     url: "http://www.gstatic.com/generate_204"
     interval: 300
     tolerance: 50
@@ -93,10 +93,10 @@ proxy-groups:
     type: select
     proxies:
       - "自动选择"
-      - "Hysteria2节点3-ipv6"
-      - "VMESS传输2-ipv6"
-      - "VLESS节点1"
       - "SSR节点"
+      - "VLESS节点1"
+      - "VMESS传输2-ipv6"
+      - "Hysteria2节点3-ipv6"
       - "DIRECT"
 
   # DNS专用组（强制代理海外DNS查询）
