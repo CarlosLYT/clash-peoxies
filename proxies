@@ -19,7 +19,7 @@ dns:
 
 # ====== 代理节点（SSR单节点）=====
 proxies:
-  - name: "SSR_节点"
+  - name: "SSR节点"
     type: ssr
     server: ssr.762988.xyz
     port: 33336
@@ -29,19 +29,47 @@ proxies:
     obfs: tls1.2_ticket_auth
     udp: true  # 启用UDP转发
 
+  - name: "VLESS节点1"
+    type: vless
+    server: 195.154.42.111
+    port: 33009
+    uuid: 77a33d77-7af9-4c33-9556-d6711becca04
+    network: tcp
+    tls: false
+    udp: true
+    flow: xtls-rprx-vision
+    servername: www.yahoo.com
+    client-fingerprint: chrome
+    reality-opts:
+      public-key: vQxUlk2tCENv9crfrUAp5JdJOZTKhMH7XnoKLqbAYx0
+      short-id: c0d304da0c4dcadc
+
 # ====== 策略组（适配DNS分流）=====
 proxy-groups:
+  # 自动选择延迟最低的节点
+  - name: "自动选择"
+    type: url-test
+    proxies:
+      - "VLESS节点1"
+      - "SSR节点"
+    url: "http://www.gstatic.com/generate_204"
+    interval: 300
+    tolerance: 50
+
+  # 手动选择节点
   - name: "🚀 代理策略"
     type: select
     proxies:
-      - "SSR_节点"
-      - DIRECT
+      - "自动选择"
+      - "VLESS节点1"
+      - "SSR节点"
+      - "DIRECT"
 
   # DNS专用组（强制代理海外DNS查询）
   - name: "DNS_PROXY"
     type: select
     proxies:
-      - "SSR_节点"  # 强制DNS查询走代理
+      - "自动选择"  # 强制DNS查询走代理
 
 # ====== 规则分流（DNS关键优化）=====
 rules:
