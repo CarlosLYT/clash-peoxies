@@ -35,8 +35,8 @@ proxies:
     port: 33009
     uuid: 77a33d77-7af9-4c33-9556-d6711becca04
     network: tcp
-    tls: false
-    udp: true
+    tls: true
+    #udp: true
     flow: xtls-rprx-vision
     servername: www.yahoo.com
     client-fingerprint: chrome
