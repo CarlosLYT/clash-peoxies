@@ -21,7 +21,7 @@ dns:
 proxies:
   - name: "SSR节点"
     type: ssr
-    server: ssr.762988.xyz
+    server: ssr2.762988.xyz
     port: 33336
     password: "dongtaiwang.com"  # ✅ 已填入密码
     cipher: chacha20-ietf
@@ -31,7 +31,7 @@ proxies:
 
   - name: "VLESS节点1"
     type: vless
-    server: 195.154.42.111
+    server: 195.154.200.156
     port: 33009
     uuid: 77a33d77-7af9-4c33-9556-d6711becca04
     network: tcp
