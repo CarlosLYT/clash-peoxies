@@ -61,7 +61,7 @@ proxies:
 
   - name: "Hysteria2节点3-ipv6"
     type: hysteria2
-    server: "[2001:bc8:1203:209::60]"
+    server: "2001:bc8:1203:209::60"
     port: 33880
     password: "dongtaiwang.com"
     sni: "apple.com"
