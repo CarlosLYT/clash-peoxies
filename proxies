@@ -45,8 +45,6 @@ proxies:
     http-opts:
       path:
         - "/github.com/Alvin9999"
-      headers:
-        Host: "mora.jp"
   
   - name: "VMESS传输2-ipv6"
     type: vmess
