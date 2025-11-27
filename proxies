@@ -34,17 +34,19 @@ proxies:
     server: 212.129.2.4
     port: 33887
     uuid: 33610372-fefc-456f-a3f2-5d65a48805ab
-    network: xhttp
+    network: http
     tls: true
-    security: reality
+    udp: true
     servername: mora.jp
     client-fingerprint: chrome
     reality-opts:
       public-key: pk-jNQMhO1bmyp8Ml2lpPj_gHXNVsVzR9TzsraF-bnc
       short-id: 6f16ae83145d45a5
-    xhttp-opts:
-      path: "/github.com/Alvin9999"
-      spx: "/"
+    http-opts:
+      path:
+        - "/github.com/Alvin9999"
+      headers:
+        Host: "mora.jp"
   
   - name: "VMESS传输2-ipv6"
     type: vmess
