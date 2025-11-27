@@ -31,7 +31,7 @@ proxies:
 
   - name: "VLESS节点1"
     type: vless
-    server: 212.129.2.3
+    server: 212.129.2.4
     port: 33887
     uuid: 33610372-fefc-456f-a3f2-5d65a48805ab
     network: xhttp
