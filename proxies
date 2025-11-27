@@ -30,21 +30,21 @@ proxies:
     udp: true  # 启用UDP转发
 
   - name: "VLESS节点1"
-  type: vless
-  server: 212.129.2.4
-  port: 33887
-  uuid: 33610372-fefc-456f-a3f2-5d65a48805ab
-  network: xhttp
-  tls: true
-  security: reality
-  servername: mora.jp
-  client-fingerprint: chrome
-  reality-opts:
-    public-key: pk-jNQMhO1bmyp8Ml2lpPj_gHXNVsVzR9TzsraF-bnc
-    short-id: 6f16ae83145d45a5
-  xhttp-opts:
-    path: "/github.com/Alvin9999"
-    spx: "/"
+    type: vless
+    server: 212.129.2.4
+    port: 33887
+    uuid: 33610372-fefc-456f-a3f2-5d65a48805ab
+    network: xhttp
+    tls: true
+    security: reality
+    servername: mora.jp
+    client-fingerprint: chrome
+    reality-opts:
+      public-key: pk-jNQMhO1bmyp8Ml2lpPj_gHXNVsVzR9TzsraF-bnc
+      short-id: 6f16ae83145d45a5
+    xhttp-opts:
+      path: "/github.com/Alvin9999"
+      spx: "/"
   
   - name: "VMESS传输2-ipv6"
     type: vmess
