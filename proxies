@@ -44,6 +44,7 @@ proxies:
       short-id: 6f16ae83145d45a5
     xhttp-opts:
       path: "/github.com/Alvin9999"
+      spx: "/"
   
   - name: "VMESS传输2-ipv6"
     type: vmess
