@@ -42,6 +42,7 @@ proxies:
     reality-opts:
       public-key: pk-jNQMhO1bmyp8Ml2lpPj_gHXNVsVzR9TzsraF-bnc
       short-id: 6f16ae83145d45a5
+      spider-x: false
     xhttp-opts:
       path: "/github.com/Alvin9999"
       spx: "/"
