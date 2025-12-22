@@ -64,8 +64,8 @@ proxies:
 
   - name: "Hysteria2节点4-ipv4"
     type: hysteria2
-    server: "195.154.206.231"
-    port: 33880
+    server: 109.104.152.244
+    port: 11220
     password: "dongtaiwang.com"
     sni: "apple.com"
     alpn:
