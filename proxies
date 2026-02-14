@@ -5,19 +5,19 @@ mode: rule
 log-level: info
 external-controller: 127.0.0.1:9090
 
-# ====== DNS 配置（启用 Fake-IP 防污染）[6,9](@ref) ======
+# ====== DNS 配置 ======
 dns:
   enable: false
   listen: 0.0.0.0:53
-  enhanced-mode: fake-ip  # 伪造IP防止DNS污染
+  enhanced-mode: fake-ip
   nameserver:
-    - 114.114.114.114    # 国内DNS（电信）
-    - 8.8.8.8            # 海外DNS（Google）
-  fallback:              # 备用DNS（代理专用）
-    - tls://1.1.1.1@853  # Cloudflare加密DNS
+    - 114.114.114.114
+    - 8.8.8.8
+  fallback:
+    - tls://1.1.1.1@853
     - https://dns.google/dns-query
 
-# ====== 代理节点（SSR单节点）=====
+# ====== 代理节点 ======
 proxies:
   - name: "SSR节点"
     type: ssr
@@ -79,10 +79,8 @@ proxies:
       - "h3"
     skip-cert-verify: true
 
-
-# ====== 策略组（适配DNS分流）=====
+# ====== 策略组 ======
 proxy-groups:
-  # 自动选择延迟最低的节点
   - name: "自动选择"
     type: url-test
     proxies:
@@ -95,8 +93,7 @@ proxy-groups:
     interval: 300
     tolerance: 50
 
-  # 手动选择节点
-  - name: "🚀 代理策略"
+  - name: "🚀 主代理"
     type: select
     proxies:
       - "自动选择"
@@ -107,25 +104,73 @@ proxy-groups:
       - "Hysteria2节点4-ipv4"
       - "DIRECT"
 
-  # DNS专用组（强制代理海外DNS查询）
+  - name: "🤖 AI服务"
+    type: select
+    proxies:
+      - "🚀 主代理"
+      - "自动选择"
+      - "DIRECT"
+
+  - name: "🌍 Google服务"
+    type: select
+    proxies:
+      - "🚀 主代理"
+      - "自动选择"
+      - "DIRECT"
+
+  - name: "🎬 流媒体"
+    type: select
+    proxies:
+      - "🚀 主代理"
+      - "自动选择"
+      - "DIRECT"
+
+  - name: "📱 社交媒体"
+    type: select
+    proxies:
+      - "🚀 主代理"
+      - "自动选择"
+      - "DIRECT"
+
   - name: "DNS_PROXY"
     type: select
     proxies:
-      - "自动选择"  # 强制DNS查询走代理
+      - "🚀 主代理"
 
-# ====== 规则分流（DNS关键优化）=====
+# ====== 规则 ======
 rules:
-  # 国内直连规则
-  - GEOIP,CN,DIRECT              # 中国大陆IP直连 [9](@ref)
-  - DOMAIN-SUFFIX,cn,DIRECT      # 中国域名直连
-  
-  # DNS强制代理规则（避免污染）
-  - DST-PORT,53,DNS_PROXY        # 所有53端口DNS请求强制代理 [6](@ref)
-  - IP-CIDR,8.8.8.8/32,DNS_PROXY # 指定海外DNS服务器走代理
-  
-  # 国际服务代理
-  - DOMAIN-SUFFIX,google.com,🚀 代理策略
-  - DOMAIN-SUFFIX,youtube.com,🚀 代理策略
-  
-  # 最终规则
-  - MATCH,🚀 代理策略
+  # 国内直连
+  - GEOIP,CN,DIRECT
+  - DOMAIN-SUFFIX,cn,DIRECT
+
+  # DNS 防污染
+  - DST-PORT,53,DNS_PROXY
+  - IP-CIDR,8.8.8.8/32,DNS_PROXY
+
+  # AI（含 Gemini）
+  - DOMAIN-SUFFIX,gemini.google.com,🤖 AI服务
+  - DOMAIN-SUFFIX,generativelanguage.googleapis.com,🤖 AI服务
+  - DOMAIN-SUFFIX,ai.google.dev,🤖 AI服务
+  - DOMAIN-SUFFIX,openai.com,🤖 AI服务
+  - DOMAIN-SUFFIX,chatgpt.com,🤖 AI服务
+
+  # Google 服务
+  - DOMAIN-SUFFIX,google.com,🌍 Google服务
+  - DOMAIN-SUFFIX,googleapis.com,🌍 Google服务
+  - DOMAIN-SUFFIX,gstatic.com,🌍 Google服务
+  - DOMAIN-SUFFIX,youtube.com,🌍 Google服务
+
+  # 流媒体
+  - DOMAIN-SUFFIX,netflix.com,🎬 流媒体
+  - DOMAIN-SUFFIX,disneyplus.com,🎬 流媒体
+  - DOMAIN-SUFFIX,hbo.com,🎬 流媒体
+
+  # 社交媒体
+  - DOMAIN-SUFFIX,twitter.com,📱 社交媒体
+  - DOMAIN-SUFFIX,x.com,📱 社交媒体
+  - DOMAIN-SUFFIX,facebook.com,📱 社交媒体
+  - DOMAIN-SUFFIX,instagram.com,📱 社交媒体
+  - DOMAIN-SUFFIX,telegram.org,📱 社交媒体
+
+  # 兜底
+  - MATCH,🚀 主代理
