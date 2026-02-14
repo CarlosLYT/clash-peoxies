@@ -149,6 +149,7 @@ rules:
 
   # AI（含 Gemini）
   - DOMAIN-SUFFIX,gemini.google.com,🤖 AI服务
+  - DOMAIN-SUFFIX,google-analytics.com,🤖 AI服务
   - DOMAIN-SUFFIX,generativelanguage.googleapis.com,🤖 AI服务
   - DOMAIN-SUFFIX,ai.google.dev,🤖 AI服务
   - DOMAIN-SUFFIX,openai.com,🤖 AI服务
