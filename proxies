@@ -7,14 +7,14 @@ external-controller: 127.0.0.1:9090
 
 # ====== DNS 配置 ======
 dns:
-  enable: false
+  enable: true
   listen: 0.0.0.0:53
   enhanced-mode: fake-ip
   nameserver:
-    - 114.114.114.114
     - 8.8.8.8
+    - 114.114.114.114
   fallback:
-    - tls://1.1.1.1@853
+    - tls://1.1.1.1:853
     - https://dns.google/dns-query
 
 # ====== 代理节点 ======
@@ -29,21 +29,22 @@ proxies:
     obfs: tls1.2_ticket_auth
     udp: true
 
-  - name: "VLESS节点1"
+  - name: "VLESS节点1-WS-Reality"
     type: vless
     server: 157.254.223.64
     port: 23000
     uuid: bcb13ecb-4f63-4257-ae01-ec5aeaa613a5
-    network: xhttp
+    network: ws
     security: reality
     servername: mxj.myanimelist.net
     client-fingerprint: chrome
     reality-opts:
       public-key: dJFLqPCinyadJxJk7zA_DwBOEAvexvm7AZT2Pw84_EY
       short-id: 955275866feece09
-    xhttp-opts:
+    ws-opts:
       path: "/alvin9999.com"
-      spx: "/"
+      headers:
+        Host: "mxj.myanimelist.net"
 
   - name: "VMESS传输2-ipv6"
     type: vmess
@@ -85,7 +86,7 @@ proxy-groups:
     type: url-test
     proxies:
       - "SSR节点"
-      - "VLESS节点1"
+      - "VLESS节点1-WS-Reality"
       - "VMESS传输2-ipv6"
       - "Hysteria2节点3-ipv6"
       - "Hysteria2节点4-ipv4"
@@ -98,7 +99,7 @@ proxy-groups:
     proxies:
       - "自动选择"
       - "SSR节点"
-      - "VLESS节点1"
+      - "VLESS节点1-WS-Reality"
       - "VMESS传输2-ipv6"
       - "Hysteria2节点3-ipv6"
       - "Hysteria2节点4-ipv4"
@@ -139,39 +140,26 @@ proxy-groups:
 
 # ====== 规则 ======
 rules:
-  # 国内直连
   - GEOIP,CN,DIRECT
   - DOMAIN-SUFFIX,cn,DIRECT
-
-  # DNS 防污染
   - DST-PORT,53,DNS_PROXY
   - IP-CIDR,8.8.8.8/32,DNS_PROXY
-
-  # AI（含 Gemini）
   - DOMAIN-SUFFIX,gemini.google.com,🤖 AI服务
   - DOMAIN-SUFFIX,google-analytics.com,🤖 AI服务
   - DOMAIN-SUFFIX,generativelanguage.googleapis.com,🤖 AI服务
   - DOMAIN-SUFFIX,ai.google.dev,🤖 AI服务
   - DOMAIN-SUFFIX,openai.com,🤖 AI服务
   - DOMAIN-SUFFIX,chatgpt.com,🤖 AI服务
-
-  # Google 服务
   - DOMAIN-SUFFIX,google.com,🌍 Google服务
   - DOMAIN-SUFFIX,googleapis.com,🌍 Google服务
   - DOMAIN-SUFFIX,gstatic.com,🌍 Google服务
   - DOMAIN-SUFFIX,youtube.com,🌍 Google服务
-
-  # 流媒体
   - DOMAIN-SUFFIX,netflix.com,🎬 流媒体
   - DOMAIN-SUFFIX,disneyplus.com,🎬 流媒体
   - DOMAIN-SUFFIX,hbo.com,🎬 流媒体
-
-  # 社交媒体
   - DOMAIN-SUFFIX,twitter.com,📱 社交媒体
   - DOMAIN-SUFFIX,x.com,📱 社交媒体
   - DOMAIN-SUFFIX,facebook.com,📱 社交媒体
   - DOMAIN-SUFFIX,instagram.com,📱 社交媒体
   - DOMAIN-SUFFIX,telegram.org,📱 社交媒体
-
-  # 兜底
   - MATCH,🚀 主代理
