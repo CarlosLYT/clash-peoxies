@@ -55,6 +55,8 @@ proxies:
     cipher: auto
     udp: true
     network: ws
+    tls: true
+    servername: www.bing.com
     ws-opts:
       path: "/alvin9999.com"
       headers:
