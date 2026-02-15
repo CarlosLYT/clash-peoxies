@@ -55,6 +55,8 @@ proxies:
     cipher: auto
     udp: true
     network: ws
+    tls: true
+    skip-cert-verify: true
     ws-opts:
       path: "/alvin9999.com"
       headers:
