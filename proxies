@@ -48,7 +48,7 @@ proxies:
 
   - name: "VMESS传输2-ipv6"
     type: vmess
-    server: 2a14:7584:d04a::a
+    server: 2a14:7584:d0a2::a
     port: 23456
     uuid: bd48e0ac-e90e-4451-a4f2-abf061cfb890
     alterId: 0
