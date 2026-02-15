@@ -141,8 +141,6 @@ proxy-groups:
 
 # ====== 规则 ======
 rules:
-  - GEOIP,CN,DIRECT
-  - DOMAIN-SUFFIX,cn,DIRECT
   - DST-PORT,53,DNS_PROXY
   - IP-CIDR,8.8.8.8/32,DNS_PROXY
   - DOMAIN-SUFFIX,gemini.google.com,🤖 AI服务
@@ -163,4 +161,6 @@ rules:
   - DOMAIN-SUFFIX,facebook.com,📱 社交媒体
   - DOMAIN-SUFFIX,instagram.com,📱 社交媒体
   - DOMAIN-SUFFIX,telegram.org,📱 社交媒体
+  - GEOIP,CN,DIRECT
+  - DOMAIN-SUFFIX,cn,DIRECT
   - MATCH,🚀 主代理
