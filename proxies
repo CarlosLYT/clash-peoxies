@@ -89,7 +89,7 @@ proxy-groups:
     type: url-test
     proxies:
       - "SSR节点"
-      - "VLESS节点1-WS-Reality"
+      - "VLESS-xhttp-Reality-Vision"
       - "VMESS传输2-ipv6"
       - "Hysteria2节点3-ipv6"
       - "Hysteria2节点4-ipv4"
@@ -102,7 +102,7 @@ proxy-groups:
     proxies:
       - "自动选择"
       - "SSR节点"
-      - "VLESS节点1-WS-Reality"
+      - "VLESS-xhttp-Reality-Vision"
       - "VMESS传输2-ipv6"
       - "Hysteria2节点3-ipv6"
       - "Hysteria2节点4-ipv4"
