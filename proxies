@@ -29,23 +29,25 @@ proxies:
     obfs: tls1.2_ticket_auth
     udp: true
 
-  - name: "VLESS节点1-WS-Reality"
+  - name: VLESS-xhttp-Reality-Vision
     type: vless
-    server: 157.254.223.64
-    port: 23000
-    uuid: bcb13ecb-4f63-4257-ae01-ec5aeaa613a5
-    network: ws
-    security: reality
-    servername: mxj.myanimelist.net
+    server: 2001:bc8:32d7:302::10
+    port: 60277
+    uuid: 4e9a2de3-4193-49a9-b7fb-b5fff8479904
+    udp: true
+    tls: true
+    servername: www.lovelive-anime.jp
     client-fingerprint: chrome
     reality-opts:
-      public-key: dJFLqPCinyadJxJk7zA_DwBOEAvexvm7AZT2Pw84_EY
-      short-id: 955275866feece09
-    ws-opts:
-      path: "/alvin9999.com"
-      headers:
-        Host: "mxj.myanimelist.net"
-
+      public-key: o2mKhGNfc7h3XaxZgmmAWHnWs5FdwciNPoSFMOh2wng
+      short-id: cd0bbb9f
+    encryption: ""
+    network: xhttp
+    xhttp-opts:
+      host: www.lovelive-anime.jp
+      path: /YplI82oo
+      mode: auto
+  
   - name: "VMESS传输2-ipv6"
     type: vmess
     server: 2a14:7584:d0a2::a
