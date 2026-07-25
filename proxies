@@ -64,17 +64,11 @@ proxies:
     type: anytls
     server: anytls2.934618.xyz
     port: 22880
-    password: "github.com/Alvin9999-newpac/fanqiang"
+    password: github.com/Alvin9999-newpac/fanqiang
+    tls: true
+    servername: anytls2.934618.xyz
+    network: tcp
     udp: true
-    sni: anytls2.934618.xyz？
-    skip-cert-verify: false
-    client-fingerprint: chrome
-    alpn:
-      - h2
-      - http/1.1
-    idle-session-check-interval: 30
-    idle-session-timeout: 30
-    min-idle-session: 0
 
 # ====== 策略组 ======
 proxy-groups:
