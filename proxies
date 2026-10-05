@@ -169,12 +169,38 @@ proxy-groups:
 rules:
   - DST-PORT,53,DNS_PROXY
   - IP-CIDR,8.8.8.8/32,DNS_PROXY
+  # AI 服务
   - DOMAIN-SUFFIX,gemini.google.com,🤖 AI服务
   - DOMAIN-SUFFIX,google-analytics.com,🤖 AI服务
   - DOMAIN-SUFFIX,generativelanguage.googleapis.com,🤖 AI服务
   - DOMAIN-SUFFIX,ai.google.dev,🤖 AI服务
+  # OpenAI / ChatGPT
   - DOMAIN-SUFFIX,openai.com,🤖 AI服务
   - DOMAIN-SUFFIX,chatgpt.com,🤖 AI服务
+  - DOMAIN-SUFFIX,oaistatic.com,🤖 AI服务
+  - DOMAIN-SUFFIX,oaiusercontent.com,🤖 AI服务
+  - DOMAIN-SUFFIX,oaistatsig.com,🤖 AI服务
+  - DOMAIN-SUFFIX,openaimerge.com,🤖 AI服务
+  # WorkOS
+  - DOMAIN-SUFFIX,workos.com,🤖 AI服务
+  - DOMAIN-SUFFIX,workoscdn.com,🤖 AI服务
+  - DOMAIN-SUFFIX,workos.imgix.net,🤖 AI服务
+  # Cloudflare
+  - DOMAIN-SUFFIX,challenges.cloudflare.com,🤖 AI服务
+  # Intercom
+  - DOMAIN-SUFFIX,intercom.io,🤖 AI服务
+  - DOMAIN-SUFFIX,intercomcdn.com,🤖 AI服务
+  # SendGrid
+  - DOMAIN-SUFFIX,ct.sendgrid.net,🤖 AI服务
+  # Apple
+  - DOMAIN-SUFFIX,humb.apple.com,🤖 AI服务
+  # Stripe
+  - DOMAIN-SUFFIX,js.stripe.com,🤖 AI服务
+  # Sentry
+  - DOMAIN-SUFFIX,o207216.ingest.sentry.io,🤖 AI服务
+  - DOMAIN-SUFFIX,o33249.ingest.sentry.io,🤖 AI服务
+  # Datadog
+  - DOMAIN-SUFFIX,rum.browser-intake-datadoghq.com,🤖 AI服务
   - DOMAIN-SUFFIX,googleapis.cn,🌍 Google服务
   - DOMAIN-SUFFIX,gvt1-cn.com,🌍 Google服务
   - DOMAIN-SUFFIX,gvt2-cn.com,🌍 Google服务
